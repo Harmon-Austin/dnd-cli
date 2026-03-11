@@ -8,7 +8,7 @@ app = typer.Typer()
 @app.command()
 def roll(
         times: Annotated[int, typer.Option(help="How many times to perform the operation")] = 1,
-        full: Annotated[bool, typer.Option(help="Displays each die roll")] = False,
+        detail: Annotated[bool, typer.Option(help="Displays each die roll")] = False,
         dice: Annotated[List[str], typer.Argument(help="Dice to roll. Can add a modifier. (Spaces allowed)")] = ["1d20"]
         ):
     """
@@ -16,7 +16,7 @@ def roll(
     """
     full_dice = "".join(dice)
     try:
-        result = roller.roll(full_dice, times, full)
+        result = roller.roll(full_dice, times, detail)
         print(f'Total: {result}')
     except ValueError as e:
         print(e)
