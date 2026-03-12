@@ -3,19 +3,21 @@ requires = ["hatchling >= 1.26"]
 build-backend = "hatchling.build"
 
 [project]
-name = "dnd-cli-haustin"
+name = "dnd_cli"
 version = "0.0.1"
 description = "A D&D 5.5e CLI tool."
 requires-python = ">=3.10"
 readme = "README.md"
 dependencies = [
-    "typer[all]" # Includes rich and shellingham
+    "typer",
+    "rapidfuzz",
+    "rich"
 ]
 
 # This section registers the 'dnd' terminal command
 [project.scripts]
-dnd = "dnd.main:app"
+dnd = "dnd_cli.main:app"
 
 # Tells hatchling where to find the package
 [tool.hatch.build.targets.wheel]
-packages = ["src/dnd"]
+packages = ["src/dnd_cli"]
