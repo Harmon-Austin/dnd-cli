@@ -17,7 +17,7 @@ def spell_lookup(query: str, cutoff: int = 70) -> dict | None:
         cur = conn.cursor()
         rows = cur.execute("SELECT * FROM spells")
 
-        # Build a name -> row mapping
+    # Build a name -> row mapping
     name_map = {row["name"]: row for row in rows}
     names = list(name_map.keys())
 

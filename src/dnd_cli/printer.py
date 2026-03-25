@@ -64,3 +64,8 @@ def print_spell(result: dict):
     if result["higher_levels"]:
         console.print("\n[bold cyan]At Higher Levels.[/bold cyan]", end=" ")
         console.print(highlighter(result["higher_levels"]), markup=False)
+
+
+def print_monster(result: dict):
+    print("Called print_monster, WIP")
+    return

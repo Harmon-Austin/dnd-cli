@@ -1,7 +1,7 @@
 from typing import Annotated, List, cast
 import typer
 
-from . import roller, spell as spell_lookup, printer
+from . import roller, spell as spell_lookup, printer, monster as monster_lookup
 
 app = typer.Typer()
 
@@ -24,7 +24,7 @@ def roll(
 @app.command()
 def spell(query: Annotated[List[str], typer.Argument(help="Name of the spell to lookup. Can fuzzy match.")]):
     """
-    Looks up the information about the provided spell. WIP
+    Looks up the information about the provided spell.
     """
     full_query = " ".join(query)
     result = spell_lookup.spell_lookup(full_query)
@@ -40,6 +40,26 @@ def spell(query: Annotated[List[str], typer.Argument(help="Name of the spell to 
         printer.rich_print(f"[dim]Closest match: '{result['name']}' ({result['match_score']:.0f}% match)[/dim]\n")
 
     printer.print_spell(result)
+
+@app.command()
+def monster(query: Annotated[List[str], typer.Argument(help="Name of the monster to lookup. Can fuzzy match.")]):
+    """
+    Looks up the queried stat block.
+    """
+    full_query = " ".join(query)
+    result = monster_lookup.monster_lookup(full_query)
+
+    if result == None:
+        print(f"Could not find a stat block with the name {full_query}")
+    
+    # result is either a dict or None, already checked for None
+    # Doing this to supress editor warnings
+    result = cast(dict, result)
+
+    if result["match_score"] < 100:
+        printer.rich_print(f"[dim]Closest match: '{result['name']}' ({result['match_score']:.0f}% match)[/dim]\n")
+
+    printer.print_monster(result)
 
 if __name__ == "__main__":
     app()
