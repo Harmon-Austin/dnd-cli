@@ -31,6 +31,7 @@ def spell(query: Annotated[List[str], typer.Argument(help="Name of the spell to 
 
     if result == None:
         print(f"Could not find a spell with the name {query}")
+        return
     
     # result is either a dict or None, already checked for None
     # Doing this to supress editor warnings
@@ -51,6 +52,7 @@ def monster(query: Annotated[List[str], typer.Argument(help="Name of the monster
 
     if result == None:
         print(f"Could not find a stat block with the name {full_query}")
+        return
     
     # result is either a dict or None, already checked for None
     # Doing this to supress editor warnings

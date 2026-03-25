@@ -15,7 +15,7 @@ def spell_lookup(query: str, cutoff: int = 70) -> dict | None:
     with get_connection() as conn:
         # Get all spells to fuzzy match from
         cur = conn.cursor()
-        rows = cur.execute("SELECT * FROM spells")
+        rows = cur.execute("SELECT * FROM spells").fetchall()
 
     # Build a name -> row mapping
     name_map = {row["name"]: row for row in rows}
