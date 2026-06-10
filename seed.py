@@ -3,7 +3,8 @@ import sqlite3
 import re
 import csv
 
-db_path = "/Users/user/Desktop/Projects/dnd-cli/src/dnd_cli/data/dnd2024.db"
+# CLI input is WIP, for now just use the exact path
+db_path = ""
 
 def get_connection() -> sqlite3.Connection:
     conn = sqlite3.connect(db_path)
