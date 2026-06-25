@@ -8,12 +8,12 @@ from rich.theme import Theme
 class SpellHighlighter(RegexHighlighter):
     base_style = "spell."
     highlights = [
-        r"(?P<ability>Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma)",
+        r"(?P<ability>Strength\s|Dexterity\s|Constitution\s|Intelligence\s|Wisdom\s|Charisma\s)",
         r"(?P<dice>\d+d\d+)",
         r"(?P<number>(?<![d\d])\d+(?![d\d]))", #Any number not involved with nds format for dice
-        r"(?P<elemental_damage>Fire|Acid|Lightning|Thunder|Cold)",
-        r"(?P<physical_damage>Bludgeoning|Slashing|Piercing)",
-        r"(?P<special_damage>Radiant|Necrotic|Force|Poison|Psychic)"
+        r"(?P<elemental_damage>Fire\s|Acid\s|Lightning\s|Thunder\s|Cold\s)",
+        r"(?P<physical_damage>Bludgeoning\s|Slashing\s|Piercing\s)",
+        r"(?P<special_damage>Radiant\s|Necrotic\s|Force\s|Poison\s|Psychic\s)"
     ]
 
 custom_theme = Theme({

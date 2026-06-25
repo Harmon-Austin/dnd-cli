@@ -11,15 +11,7 @@ def get_connection() -> sqlite3.Connection:
     conn.row_factory = sqlite3.Row  # Allows dict-style column access
     return conn
 
-def monster_lookup(query: str, cutoff: int = 70) -> dict | None:
-    with get_connection() as conn:
-        cur = conn.cursor()
-        rows = cur.execute("SELECT * FROM monsters").fetchall()
- 
-    # Build a name -> row mapping
-    name_map = {row["name"]: row for row in rows}
-    names = list(name_map.keys())
- 
+def get_best_monster(query, names, name_map, cutoff):
     # Find the closest matching monster name
     match = process.extractOne(
         query,
@@ -68,3 +60,14 @@ def monster_lookup(query: str, cutoff: int = 70) -> dict | None:
         "treasure":             row["treasure"],
         "match_score":          score,
     }
+
+def monster_lookup(query: str, cutoff: int = 70) -> dict | None:
+    with get_connection() as conn:
+        cur = conn.cursor()
+        rows = cur.execute("SELECT * FROM monsters").fetchall()
+ 
+    # Build a name -> row mapping
+    name_map = {row["name"]: row for row in rows}
+    names = list(name_map.keys())
+ 
+    return get_best_monster(query, names, name_map, cutoff)

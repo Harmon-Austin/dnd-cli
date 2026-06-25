@@ -43,7 +43,8 @@ def spell(query: Annotated[List[str], typer.Argument(help="Name of the spell to 
     printer.print_spell(result)
 
 @app.command()
-def monster(query: Annotated[List[str], typer.Argument(help="Name of the monster to lookup. Can fuzzy match.")]):
+def monster(query: Annotated[List[str], typer.Argument(help="Name of the monster to lookup. Can fuzzy match.")], 
+            list: Annotated[bool, typer.Argument(help="List the top 10 results of the query without printing information.")] = False):
     """
     Looks up the queried stat block.
     """
